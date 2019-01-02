@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>현재 시간</title>
+<title>Insert title here</title>
 </head>
 <body>
-지금 : <%=new java.util.Date() %>
+<h1>안녕 JSP!</h1>
+<% out.print("<H1>안녕 JSP!</H1>"); %>
 </body>
 </html>
