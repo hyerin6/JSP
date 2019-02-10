@@ -27,8 +27,7 @@ else if("--".equals(cmd)) result = number-1;
 	<form method="get">
 		<div class="form-group">
 			<label>number:</label>
-				
-				<input type="text" name="number" class="form-control" value="<%= result %>" />
+			<input type="text" name="number" class="form-control" value="<%= result %>" />
 		</div>
 		<div class="form-group">
 			<input type="submit" name="cmd" value="++" class="btn btn-default">
