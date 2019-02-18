@@ -62,14 +62,65 @@ request.getSession()를 사용하여 세션을 구하므로, page 디렉티브�
 - 이후로 session 기본 객체의 특정 속성이 존재하면 로그인한 것으로 간주한다.  
 - 로그아웃할 경우 session.invalidate() 메소드를 호출하여 세션을 종료한다.  
 
-##### (1) 인증된 사용자 정보 session 기본 객체에 저장하기 
+##### (1) 인증된 사용자 정보 session 기본 객체에 저장하기   
+세션을 사용해서 로그인 상태를 유지하려면 session 기본 객체의 속성에 로그인 성공 정보를 저장하면 된다.    
 
+예) chap10/member/sessionLogin.jsp, chap10/member/sessionLoginForm.jsp  
+sessionLogin.jsp는 id 요청 파라미터와 password 요청 파라미터가 같으면 로그인에 성공한 것으로 간주하고,     
+session 기본 객체의 "MEMBERID" 속성에 사용자 아이디 정보를 저장한다.    
+즉, "MEMBERID" 속성이 존재하면 현재 사용자는 로그인한 사용자로 간주한다.  
 
+##### (2) 인증 여부 판단  
+session 기본 객체에 로그인 상태를 위한 속성의 존재 여부에 따라 로그인 상태를 판단할 수 있다.    
 
+예) chap10/member/sessionLoginCheck.jsp    
+sessionLogin.jsp은 로그인에 성공하면 MEMBERID 속성에 로그인 상태 정보를 보관하므로    
+sessionLoginCheck.jsp와 같이 session 기본 객체의 "MEMBERID" 속성을 사용해서 로그인 여부를 판단하면 된다.  
 
+##### (3) 로그아웃 처리  
+로그아웃을 처리할 때는 session.invalidate() 메소드를 사용하여 세션을 종료합니다.  
 
+예) chap10/member/sessionLogOut.jsp  
+session.invalidate()을 사용하지 않고 다음과 같이 로그인 상태를 보관할 때 사용한 session 기본 객체를 모두   
+삭제해도 로그아웃한 효과를 낼 수 있다.  
+```
+session.removeAttribute("MEMBERID");  
+```
+하지만, 로그인할 때 session 기본 객체에 추가하는 속성이 늘어나면 로그아웃 코드도 함께 변경해야 하므로  
+session.invalidate() 메소드를 사용하는 것이 좋다.  
 
-
-
-
-
+## 3. 연관된 정보 저장을 위한 클래스 작성  
+앞서 예제 코드에서 사용한 사용자 정보를 다음과 같이 저장했다.  
+```
+<%  
+  session.setAttribute("MEMBERID", memberid);  
+%>   
+```
+만약 세션에 저장할 값의 개수가 많다면 클래스를 사용하는 것이 좋다.  
+예를 들어, 회원과 관련된 정보를 다음과 같은 클래스에 묶어서 저장한다고 가정해보자.  
+```
+public class MemberInfo{
+  private String id;
+  private String name;
+  private String email;
+  private boolean male;
+  private int age;
+  
+  //get 메서드
+}
+```
+연관된 정보를 클래스로 묶어서 저장하면 각 정보를 개별 속성으로 저장하지 않고 다음과 같이 한 개의 속성을 이용해서 저장할 수 있다.  
+```
+<%
+  MemberInfo memberInfo = new MemberInfo(id, name);
+  session.setAttribute("memberInfo", memberInfo);
+%>
+```
+연관된 정보를 한 객체에 담아 저장하기 때문에, 세션에 저장한 객체를 사용할 때에도 다음과 같이 객체를 가져온 뒤 객체로부터 필요한 값을 읽을 수 있다.  
+```
+<%
+  MemberInfo member = (MemberInfo)session.getAttribute("memberInfo");
+%>
+...
+<%= member.getEmail().toLowerCase() %>
+```
