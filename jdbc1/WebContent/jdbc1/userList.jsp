@@ -37,7 +37,8 @@
 	<tbody>
 		<% for (User user : list) { %>
 			<tr>
-                <td><%= user.getUserid() %></td>
+                <td><%= user.getUserid
+                () %></td>
                 <td><%= user.getName() %></td>
                 <td><%= user.getEmail() %></td>
                 <td><%= user.getDepartmentName() %></td>
