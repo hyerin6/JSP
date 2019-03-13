@@ -14,7 +14,9 @@ http://www.11st.co.kr/html/category/1.html?xzone=ctgr1^html
 - 서버 이름(www.11st.co.kr) : 웹 페이지를 요청할 서버의 이름을 지정한다. 
 도메인 이름이나 IP주소를 입력할 수 있다. 
 
-- 경로(html/category/1.html) : 웹 페이지의 상세 주소에 해당한다. 즉, 웹 페이지마다 다른 경로를 갖는다. 
+- 경로(html/category/1.html) : 웹 페이지의 상세 주소에 해당한다. 즉, 웹 페이지마다 다른 경로를 갖는다.   
+context 이름 혹은 context path 라고 부른다.  context 이름이란 웹 서버에서 실행되는 웹 어플리케이션의 이름을 말한다.  
+eclipse에서 개발된다면 프로젝트의 이름이 톰캣 서버에서 실행될 때 context 이름이 된다.  
 
 - 쿼리 문자열 : 물음표 문자부터 뒤는 query string이다. query string은 문서의 경로명 뒤에 붙는 추가 파라미터 데이터이다.  
 이 추가 파라미터 데이터는 웹서버에서 동적 문서가 생성되고 수정될 때 사용된다.  
