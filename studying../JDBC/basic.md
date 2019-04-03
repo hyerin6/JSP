@@ -81,10 +81,13 @@ exception이 발생해서 실행흐름이 점프할 때에서, 자원객체의 c
 <br>
 
 ## 4. JDBC 객체  
-- Connection : 데이터베이스에 연결하기 위한 객체  
-- PreparedStatement : SQL 명령을 실행하기 위한 객체이다.  
-- ResultSet : SQL 명령의 조회 결과 데이터를 전달해주는 객체이다.  
-이 클래스들은 AutoCloseable 인터페이스를 implements 하였다.
+| name | 설명 | 
+|:--------|:--------|
+| Connection | 데이터베이스에 연결하기 위한 객체 | 
+| PreparedStatement | SQL 명령을 실행하기 위한 객체이다. |  
+| ResultSet | SQL 명령의 조회 결과 데이터를 전달해주는 객체이다. |  
+
+이 클래스들은 AutoCloseable 인터페이스를 implements 하였다.  
 
 작업이 끝난 후, Connection 객체의 close 메소드는 반드시 호출해 주어야 한다.  
 PreparedStatement, ResultSet 객체의 close 메소드도 가급적 호출해 주는 것이 좋다.  
