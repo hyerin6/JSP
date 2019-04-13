@@ -24,6 +24,7 @@ public class UserDAO {
 				student.setEmail(resultSet.getString("email"));
 				student.setDepartmentName(resultSet.getString("departmentName"));
 				student.setUserType(resultSet.getString("userType"));
+				student.setEnabled(resultSet.getBoolean("enabled"));
 				list.add(student);
 			}
 			return list;

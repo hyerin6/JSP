@@ -33,16 +33,17 @@
 		<th>이메일</th>
 		<th>학과</th>
 		<th>사용자유형</th>
+		<th>사용 t/f</th>
 	</tr>
 	<tbody>
 		<% for (User user : list) { %>
 			<tr>
-                <td><%= user.getUserid
-                () %></td>
+                <td><%= user.getUserid() %></td>
                 <td><%= user.getName() %></td>
                 <td><%= user.getEmail() %></td>
                 <td><%= user.getDepartmentName() %></td>
                 <td><%= user.getUserType() %></td>
+                <td><%= user.isEnabled() %>
             </tr>
         <% } %>
 	</tbody>
