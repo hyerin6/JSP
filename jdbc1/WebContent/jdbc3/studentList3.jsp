@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*, lecture1.jdbc2.*" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
 <%
 int currentPage = 1;
 int pageSize = 10;
@@ -9,7 +10,6 @@ if (pg != null) currentPage = Integer.parseInt(pg);
 
 List<Student> list = StudentDAO.findAll(currentPage, pageSize);
 int recordCount = StudentDAO.count();
-int pageCount = (int)Math.ceil((double)recordCount / pageSize);
 %>
 <!DOCTYPE html>
 <html>
@@ -53,12 +53,7 @@ int pageCount = (int)Math.ceil((double)recordCount / pageSize);
     </tbody>
 </table>
 
-<% if (currentPage > 1) { %> <!-- 처음인데 이전 버튼 보일 필요 없음 -->
-    <a class="btn btn-default" href="studentList2.jsp?pg=<%= currentPage-1 %>"> &lt; </a>
-<% } %>
-<% if (currentPage < pageCount) { %> <!-- 마지막인데 다음 버튼 보일 필요 없음 -->
-    <a class="btn btn-default" href="studentList2.jsp?pg=<%= currentPage+1 %>"> &gt; </a>
-<% } %>
+<my:pagination pageSize="<%= pageSize %>" recordCount="<%= recordCount %>" queryStringName="pg" />
 
 </div>
 </body>

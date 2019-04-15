@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*, lecture1.jdbc2.*" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
 <%
 int currentPage = 1;
 int pageSize = 10;
@@ -7,9 +8,11 @@ int pageSize = 10;
 String pg = request.getParameter("pg");
 if (pg != null) currentPage = Integer.parseInt(pg);
 
-List<Student> list = StudentDAO.findAll(currentPage, pageSize);
-int recordCount = StudentDAO.count();
-int pageCount = (int)Math.ceil((double)recordCount / pageSize);
+String srchText = request.getParameter("srchText");
+if (srchText == null) srchText = "";
+
+List<Student> list = StudentDAO2.findByName(srchText, currentPage, pageSize);
+int recordCount = StudentDAO2.count(srchText);
 %>
 <!DOCTYPE html>
 <html>
@@ -29,6 +32,15 @@ int pageCount = (int)Math.ceil((double)recordCount / pageSize);
 
 <div class="container">
 <h1>학생목록</h1>
+
+<form class="form-inline">
+  <div class="form-group">
+    <label>이름</label>
+    <input type="text" class="form-control" name="srchText" value="<%= srchText %>" 
+           placeholder="검색조건" />
+  </div>
+  <button type="submit" class="btn btn-primary">조회</button>
+</form>
 
 <table class="table table-bordered table-condensed">
     <thead>
@@ -53,12 +65,7 @@ int pageCount = (int)Math.ceil((double)recordCount / pageSize);
     </tbody>
 </table>
 
-<% if (currentPage > 1) { %> <!-- 처음인데 이전 버튼 보일 필요 없음 -->
-    <a class="btn btn-default" href="studentList2.jsp?pg=<%= currentPage-1 %>"> &lt; </a>
-<% } %>
-<% if (currentPage < pageCount) { %> <!-- 마지막인데 다음 버튼 보일 필요 없음 -->
-    <a class="btn btn-default" href="studentList2.jsp?pg=<%= currentPage+1 %>"> &gt; </a>
-<% } %>
+<my:pagination pageSize="<%= pageSize %>" recordCount="<%= recordCount %>" queryStringName="pg" />
 
 </div>
 </body>
