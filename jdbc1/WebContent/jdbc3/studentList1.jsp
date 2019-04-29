@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List, lecture1.jdbc2.*" %>
 <%
+// 이 예제는 첫 번째 페이지에 10개의 레코드만 조회한다. 
 int currentPage = 1;
 int pageSize = 10;
 List<Student> list = StudentDAO.findAll(currentPage, pageSize);
