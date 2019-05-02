@@ -33,3 +33,5 @@ String url = uri + "?" + queryString;
 // forward의 경우에만 처음 요청한 url을 리턴, forward가 아니면 null을 리턴
 ```
 위 코드로 수정    
+
+**4월 29일 중간고사 후 jsp 수업 종료**
